@@ -1,27 +1,102 @@
+type Node<T> = {
+    value: T;
+    next?: Node<T>;
+};
+
 export default class SinglyLinkedList<T> {
     public length: number;
-
-    
+    private head?: Node<T>;
+    private tail?: Node<T>;
 
     constructor() {
+        this.head = this.tail = undefined;
+        this.length = 0;
     }
 
     prepend(item: T): void {
+        let node = { value: item };
+        this.length++;
 
-}
-    insertAt(item: T, idx: number): void {
+        if (!this.head) {
+            this.head = this.tail = node;
+        }
 
-}
+        let head = this.head;
+        this.head = node;
+        this.head.next = head;
+    }
+    insertAt(item: T, idx: number): void {}
     append(item: T): void {
+        let node = { value: item };
+        this.length++;
 
-}
+        if (!this.tail) {
+            this.head = this.tail = node;
+        }
+
+        this.tail.next = node;
+        this.tail = node;
+    }
     remove(item: T): T | undefined {
+        let curr = this.head;
+        let pre = undefined;
+        for (let i = 0; i < this.length && curr?.value !== item; i++) {
+            pre = curr;
+            curr = curr?.next;
+        }
+        let next = curr?.next;
+        if (curr) {
+            if (!pre) {
+                if (!next) {
+                    this.head = this.tail = undefined;
+                } else {
+                    this.head = next;
+                }
+            } else {
+                if (!next) {
+                    this.tail = pre;
+                } else {
+                    pre.next = next;
+                }
+            }
+            this.length--;
+        }
 
-}
+        return curr?.value;
+    }
     get(idx: number): T | undefined {
+        let curr = this.head;
+        for (let i = 0; i < idx && curr; i++) {
+            curr = curr.next;
+        }
 
-}
+        return curr?.value;
+    }
     removeAt(idx: number): T | undefined {
+        let curr = this.head;
+        let pre = undefined;
+        for (let i = 0; i < idx && curr; i++) {
+            pre = curr;
+            curr = curr.next;
+        }
+        let next = curr?.next;
+        if (curr) {
+            if (!pre) {
+                if (!next) {
+                    this.head = this.tail = undefined;
+                } else {
+                    this.head = next;
+                }
+            } else {
+                if (!next) {
+                    this.tail = pre;
+                } else {
+                    pre.next = next;
+                }
+            }
+            this.length--;
+        }
 
-}
+        return curr?.value;
+    }
 }
