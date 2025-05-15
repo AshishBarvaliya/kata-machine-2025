@@ -25,7 +25,40 @@ export default class SinglyLinkedList<T> {
         this.head = node;
         this.head.next = head;
     }
-    insertAt(item: T, idx: number): void {}
+    insertAt(item: T, idx: number): void {
+        let node: Node<T> = { value: item };
+        let curr = this.head;
+        let pre = undefined;
+        for (let i = 0; i < idx && curr; i++) {
+            pre = curr;
+            curr = curr.next;
+        }
+        let next = curr?.next;
+        this.length++;
+        if (curr) {
+            if (!pre) {
+                this.head = node;
+                this.head.next = curr;
+            } else {
+                if (!next) {
+                    curr.next = node;
+                    this.tail = node;
+                } else {
+                    pre.next = node;
+                    node.next = next;
+                }
+            }
+        } else {
+            if (idx === 0) {
+                this.head = this.tail = node;
+            } else if (pre) {
+                pre.next = node;
+                this.tail = node;
+            } else {
+                this.length--;
+            }
+        }
+    }
     append(item: T): void {
         let node = { value: item };
         this.length++;
