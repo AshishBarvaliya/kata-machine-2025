@@ -19,6 +19,7 @@ export default class SinglyLinkedList<T> {
 
         if (!this.head) {
             this.head = this.tail = node;
+            return;
         }
 
         let head = this.head;
@@ -65,6 +66,7 @@ export default class SinglyLinkedList<T> {
 
         if (!this.tail) {
             this.head = this.tail = node;
+            return;
         }
 
         this.tail.next = node;

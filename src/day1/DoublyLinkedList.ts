@@ -20,6 +20,7 @@ export default class DoublyLinkedList<T> {
 
         if (!this.head) {
             this.head = this.tail = node;
+            return;
         }
 
         let head = this.head;
@@ -72,6 +73,7 @@ export default class DoublyLinkedList<T> {
 
         if (!this.tail) {
             this.head = this.tail = node;
+            return;
         }
 
         let tail = this.tail;
